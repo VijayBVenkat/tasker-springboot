@@ -32,7 +32,8 @@ public class TaskController {
         task.setCreatedAt(taskDTO.getCreatedAt());
         task.setUser(user);
 
-        return taskService.createTask(task);
+//        return taskService.createTask(task);
+        return taskService.createTaskAndLogOperation(task, taskDTO.getEmail());
     }
 
     @GetMapping("/user/{userId}")

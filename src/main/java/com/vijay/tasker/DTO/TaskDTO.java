@@ -10,6 +10,7 @@ public class TaskDTO {
     private String description;
     private LocalDateTime createdAt;
     private String userName;
+    private String email;
 
 }
 

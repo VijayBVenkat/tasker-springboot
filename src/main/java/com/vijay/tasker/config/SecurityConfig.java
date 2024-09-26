@@ -18,19 +18,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SecurityConfig {
 
     private final UserService userService;
     private final JwtRequestFilter jwtRequestFilter;
-
-    public SecurityConfig(UserService userService, JwtRequestFilter jwtRequestFilter) {
-        this.userService = userService;
-        this.jwtRequestFilter = jwtRequestFilter;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
