@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: MySQL4VJ@
+      MYSQL_DATABASE: task_management
+      MYSQL_USER: taskerUser
+      MYSQL_PASSWORD: taskerPwd
+    ports:
+      - "3307:3306"
+    networks:
+      - tasker-network
+
+  tasker-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tasker-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/task_management
+      SPRING_DATASOURCE_USERNAME: taskerUser
+      SPRING_DATASOURCE_PASSWORD: taskerPwd
+    depends_on:
+      - mysql
+    networks:
+      - tasker-network
+
+networks:
+  tasker-network:
+    driver: bridge
